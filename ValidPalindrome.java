@@ -11,8 +11,8 @@ For example,
  * */
 package practice;
 
-// You can use == to compare if char is equal
-// Since char is a primitive you can compare it using the == operator.
+// You can use == to compare, if char is equal
+// Since char is a primitive element and you can compare it by using the == operator.
 
 public class ValidPalindrome {
 
