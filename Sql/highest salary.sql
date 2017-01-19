@@ -14,7 +14,7 @@ Employee  table
 Department  table 
 
 +----+----------+ 
-| Id | Name   | 
+| Id | Name     | 
 +----+----------+ 
 | 1  | IT       | 
 | 2  | Sales    | 
