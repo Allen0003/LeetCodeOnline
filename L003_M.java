@@ -2,8 +2,6 @@ package practice;
 
 import java.util.HashSet;
 
-// dynamic programming
-
 public class L003_M {
 
 	public static void main(String[] args) {
