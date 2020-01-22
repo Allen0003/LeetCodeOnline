@@ -61,4 +61,14 @@ public class L60To80 {
     }
 
 
+    //L069
+    public int mySqrt(int x) {
+        return (int) Math.sqrt(x);
+    }
+
+    //L075
+    public void sortColors(int[] nums) {
+
+        Arrays.sort(nums);
+    }
 }
