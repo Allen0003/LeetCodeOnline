@@ -96,10 +96,22 @@ public class L100To150 {
         return list2;
     }
 
-    public boolean hasPathSum(TreeNode root, int sum) {
-        return false;
-    }
 
+    public boolean hasPathSum(TreeNode root, int sum) {
+
+        if (root == null) {
+            return false;
+        }
+
+        if (root != null && root.right == null && root.left == null) { // find the leaf
+            return root.val == sum;
+        } else if (root != null && root.right == null) {
+            return hasPathSum(root.left, sum - root.val);
+        } else if (root != null && root.left == null) {
+            return hasPathSum(root.right, sum - root.val);
+        }
+        return hasPathSum(root.right, sum - root.val) || hasPathSum(root.left, sum - root.val);
+    }
 
 
 }
