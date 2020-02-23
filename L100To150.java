@@ -113,5 +113,36 @@ public class L100To150 {
         return hasPathSum(root.right, sum - root.val) || hasPathSum(root.left, sum - root.val);
     }
 
+    public int maxProfit(int[] prices) {
+        int profit = 0;
+
+        if (prices == null || prices.length < 2) {
+            return profit;
+        }
+
+        int buyPrice = Integer.MAX_VALUE;
+        boolean holdItem = false;
+        int sellPrice = Integer.MIN_VALUE;
+
+
+        for (int i = 0; i < prices.length; i++) {
+            if (prices[i] <= buyPrice) {
+                buyPrice = prices[i];
+                holdItem = true;
+            } else if (holdItem && sellPrice <= prices[i]) {
+                sellPrice = prices[i];
+                if (i < prices.length - 1 && sellPrice > prices[i + 1]) { //selling point not the least item
+                    profit += (sellPrice - buyPrice);
+                    holdItem = false;
+                    buyPrice = Integer.MAX_VALUE;
+                    sellPrice = Integer.MIN_VALUE;
+                } else if (true && i == prices.length - 1) {// the last item
+                    profit += (sellPrice - buyPrice);
+                }
+            }
+        }
+        return profit;
+    }
+    
 
 }
