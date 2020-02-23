@@ -281,4 +281,27 @@ public class L110_150_Test {
         assertEquals(new L100To150().hasPathSum(node1, 1), true);
     }
 
+     // 112
+    @Test
+    public void testMaxProfitCase1() {
+        assertEquals(new L100To150().maxProfit(new int[]{7, 1, 5, 3, 6, 4}), 7);
+    }
+
+
+    @Test
+    public void testMaxProfitCase2() {
+        assertEquals(new L100To150().maxProfit(new int[]{1, 2, 3, 4, 5}), 4);
+    }
+
+
+    @Test
+    public void testMaxProfitCase3() {
+        assertEquals(new L100To150().maxProfit(new int[]{7, 6, 4, 3, 1}), 0);
+    }
+
+    @Test
+    public void testMaxProfitCase4() {
+        assertEquals(new L100To150().maxProfit(new int[]{5, 2, 3, 2, 6, 6, 2, 9, 1, 0, 7, 4, 5, 0}), 20);
+    }
+    
 }
