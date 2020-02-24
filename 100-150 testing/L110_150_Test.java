@@ -273,35 +273,184 @@ public class L110_150_Test {
 
     @Test
     public void testHasPathSumCase7() {
-
-
         TreeNode node1 = new TreeNode(1);
-
-
         assertEquals(new L100To150().hasPathSum(node1, 1), true);
     }
 
-     // 112
     @Test
     public void testMaxProfitCase1() {
         assertEquals(new L100To150().maxProfit(new int[]{7, 1, 5, 3, 6, 4}), 7);
     }
-
 
     @Test
     public void testMaxProfitCase2() {
         assertEquals(new L100To150().maxProfit(new int[]{1, 2, 3, 4, 5}), 4);
     }
 
-
     @Test
     public void testMaxProfitCase3() {
         assertEquals(new L100To150().maxProfit(new int[]{7, 6, 4, 3, 1}), 0);
     }
 
+
     @Test
-    public void testMaxProfitCase4() {
-        assertEquals(new L100To150().maxProfit(new int[]{5, 2, 3, 2, 6, 6, 2, 9, 1, 0, 7, 4, 5, 0}), 20);
+    public void testIsBalancedCase1() {
+
+        //     [3,9,20,null,null,15,7]:
+        TreeNode node1 = new TreeNode(3);
+        TreeNode node2 = new TreeNode(9);
+        TreeNode node3 = new TreeNode(20);
+//        TreeNode node4 = new TreeNode(3);
+//        TreeNode node5 = new TreeNode(3);
+        TreeNode node6 = new TreeNode(15);
+        TreeNode node7 = new TreeNode(7);
+//        TreeNode node8 = new TreeNode(5);
+
+
+        // node 1
+        node1.left = node2;
+        node1.right = node3;
+
+        // node 2
+//        node2.left = node4;
+//        node2.right = node5;
+
+        // node 3
+        node3.left = node6;
+        node3.right = node7;
+
+        // node 4
+//        node4.left = node8;
+
+
+        assertEquals(new L100To150().isBalanced(node1), true);
     }
-    
+
+    @Test
+    public void testIsBalancedCase2() {
+        //     [1,2,2,3, 3,null,null,4,4]:
+        TreeNode node1 = new TreeNode(1);
+        TreeNode node2 = new TreeNode(2);
+        TreeNode node3 = new TreeNode(2);
+        TreeNode node4 = new TreeNode(3);
+
+        TreeNode node5 = new TreeNode(3);
+//        TreeNode node6 = new TreeNode(15);
+//        TreeNode node7 = new TreeNode(7);
+        TreeNode node8 = new TreeNode(4);
+        TreeNode node9 = new TreeNode(4);
+
+        // node 1
+        node1.left = node2;
+        node1.right = node3;
+
+        // node 2
+        node2.left = node4;
+        node2.right = node5;
+
+        // node 3
+//        node3.left = node6;
+//        node3.right = node7;
+
+        // node 4
+        node4.left = node8;
+        node4.right = node9;
+
+
+        assertEquals(new L100To150().isBalanced(node1), false);
+    }
+
+
+    @Test
+    public void testIsBalancedCase3() {
+        //     [1,2,2,3, 3,3,null,4,4]:
+        TreeNode node1 = new TreeNode(1);
+        TreeNode node2 = new TreeNode(2);
+        TreeNode node3 = new TreeNode(2);
+        TreeNode node4 = new TreeNode(3);
+        TreeNode node5 = new TreeNode(3);
+        TreeNode node6 = new TreeNode(3);
+//        TreeNode node7 = new TreeNode(7);
+        TreeNode node8 = new TreeNode(5);
+        TreeNode node9 = new TreeNode(5);
+
+
+        // node 1
+        node1.left = node2;
+        node1.right = node3;
+
+        // node 2
+//        node2.left = node4;
+        node2.right = node5;
+
+        // node 3
+        node3.left = node6;
+//        node3.right = node7;
+
+        // node 4
+        node4.left = node8;
+        node4.right = node9;
+        assertEquals(new L100To150().isBalanced(node1), true);
+
+    }
+
+
+    @Test
+    public void testIsBalancedCase4() {
+        //   [1,2,2,3,null,   null,3,4,null,null,4]
+        TreeNode node1 = new TreeNode(1);
+        TreeNode node2 = new TreeNode(2);
+        TreeNode node3 = new TreeNode(2);
+        TreeNode node4 = new TreeNode(3);
+//        TreeNode node5 = new TreeNode(3);
+
+//        TreeNode node6 = new TreeNode(3);
+        TreeNode node7 = new TreeNode(3);
+        TreeNode node8 = new TreeNode(4);
+//        TreeNode node9 = new TreeNode(5);
+//        TreeNode node10 = new TreeNode(5);
+        TreeNode node11 = new TreeNode(4);
+
+
+        // node 1
+        node1.left = node2;
+        node1.right = node3;
+
+        // node 2
+        node2.left = node4;
+//        node2.right = node5;
+
+        // node 3
+//        node3.left = node6;
+        node3.right = node7;
+
+        // node 4
+        node4.left = node8;
+//        node4.right = node9;
+
+        // node 5
+//        node5.left = node10;
+        node7.right = node11;
+
+        assertEquals(new L100To150().isBalanced(node1), false);
+
+    }
+
+
+    @Test
+    public void testIsBalancedCase5() {
+        //     [1,2,2,3, 3,null,null,4,4]:
+        TreeNode node1 = new TreeNode(1);
+        TreeNode node2 = new TreeNode(2);
+        TreeNode node3 = new TreeNode(2);
+
+
+        // node 1
+        node1.left = node2;
+        node2.right = node3;
+
+
+        assertEquals(new L100To150().isBalanced(node1), false);
+    }
+
 }
