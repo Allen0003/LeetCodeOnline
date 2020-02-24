@@ -114,6 +114,7 @@ public class L100To150 {
     }
 
     public int maxProfit(int[] prices) {
+
         int profit = 0;
 
         if (prices == null || prices.length < 2) {
@@ -143,6 +144,24 @@ public class L100To150 {
         }
         return profit;
     }
-    
+
+    public boolean isBalanced(TreeNode root) {
+
+        if (root == null) {
+            return true;
+        }
+
+        return Math.abs(getTreeHeight(root.left) - getTreeHeight(root.right)) <= 1
+                && isBalanced(root.left)
+                && isBalanced(root.right);
+    }
+
+    public int getTreeHeight(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        return Math.max(getTreeHeight(root.left) + 1, getTreeHeight(root.right) + 1);
+    }
+
 
 }
