@@ -53,6 +53,7 @@ public class L150_200_Test {
         listNode1.next = listNode2;
         listNode2.next = listNode3;
         listNode3.next = listNode4;
+
         listNode4.next = listNode5;
 
         //[5,0,1,8,4,5]
@@ -65,6 +66,55 @@ public class L150_200_Test {
         listNode8.next = listNode3;
 
         assertEquals(minStack.getIntersectionNode(listNode1, listNode6), listNode3);
+    }
+
+
+    @Test
+    public void testIntersectionNodeCase2() {
+        //[2,6,4]
+        ListNode listNode1 = new ListNode(2);
+        ListNode listNode2 = new ListNode(6);
+        ListNode listNode3 = new ListNode(4);
+
+        listNode1.next = listNode2;
+        listNode2.next = listNode3;
+
+        //[1,5]
+        ListNode listNode6 = new ListNode(1);
+        ListNode listNode7 = new ListNode(5);
+
+        listNode6.next = listNode7;
+        assertEquals(minStack.getIntersectionNode(listNode1, listNode6), null);
+    }
+
+    @Test
+    public void testConvertToTitleCase1() {
+        assertEquals(minStack.convertToTitle(1), "A");
+    }
+
+    @Test
+    public void testConvertToTitleCase2() {
+        assertEquals(minStack.convertToTitle(28), "AB");
+    }
+
+    @Test
+    public void testConvertToTitleCase3() {
+        assertEquals(minStack.convertToTitle(701), "ZY");
+    }
+
+    @Test
+    public void testConvertToTitleCase6() {
+        assertEquals(minStack.convertToTitle(702), "ZZ");
+    }
+
+    @Test
+    public void testConvertToTitleCase4() {
+        assertEquals(minStack.convertToTitle(52), "AZ");
+    }
+
+    @Test
+    public void testConvertToTitleCase5() {
+        assertEquals(minStack.convertToTitle(26), "Z");
     }
 
 
