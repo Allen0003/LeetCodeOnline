@@ -117,5 +117,67 @@ public class L150_200_Test {
         assertEquals(minStack.convertToTitle(26), "Z");
     }
 
+    @Test
+    public void testTitleToNumberCase1() {
+        assertEquals(minStack.titleToNumber("A"), 1);
+    }
+
+    @Test
+    public void testTitleToNumberCase2() {
+        assertEquals(minStack.titleToNumber("AB"), 28);
+    }
+
+    @Test
+    public void testTitleToNumberCase3() {
+        assertEquals(minStack.titleToNumber("AZ"), 52);
+    }
+
+    @Test
+    public void testTitleToNumberCase4() {
+        assertEquals(minStack.titleToNumber("ZY"), 701);
+    }
+
+    @Test
+    public void testTitleToNumberCase5() {
+        assertEquals(minStack.titleToNumber("AAA"), 703);
+    }
+
+    @Test
+    public void testTrailingZeroesCase1() {
+        assertEquals(minStack.trailingZeroes(3), 0);
+    }
+
+    @Test
+    public void testTrailingZeroesCase2() {
+        assertEquals(minStack.trailingZeroes(5), 1);
+    }
+
+    @Test
+    public void testTrailingZeroesCase3() {
+        assertEquals(minStack.trailingZeroes(10), 2);
+    }
+
+    @Test
+    public void testTrailingZeroesCase4() {
+        assertEquals(minStack.trailingZeroes(30), 7);
+    }
+
+    @Test
+    public void testTrailingZeroesCase5() {
+        assertEquals(minStack.trailingZeroes(200), 49);
+    }
+
+    @Test
+    public void testTrailingZeroesCase6() {
+        assertEquals(minStack.trailingZeroes(130), 32);
+    }
+
+    @Test
+    public void testTrailingZeroesCase7() {
+        assertEquals(minStack.trailingZeroes(1808548329), 452137076);
+    }
+
+
+
 
 }
