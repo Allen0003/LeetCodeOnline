@@ -1,9 +1,8 @@
 import basicDataStructure.ListNode;
-import org.omg.PortableInterceptor.INACTIVE;
 
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Arrays;
 import java.util.Stack;
 
 public class L150To200 {
@@ -217,9 +216,43 @@ public class L150To200 {
         while (n != 0) {
             n = n / 5;
             countZero += n;
-
         }
         return countZero;
+    }
+
+
+    public int rob(int[] nums) {
+        int n = nums.length;
+        if (n == 0) return 0;
+        if (n == 1) return nums[0];
+
+        if (n > 2) {
+            nums[n - 3] += nums[n - 1];
+        }
+
+        for (int i = n - 4; i >= 0; i--) {
+            nums[i] += nums[i + 2] > nums[i + 3] ? nums[i + 2] : nums[i + 3];
+        }
+
+        return Math.max(nums[0], nums[1]);
+    }
+
+    public int hammingWeight(int n) {
+        
+        int count = 0;
+
+        while (n > 1) {
+            if (n % 2 == 1) {
+                count = count + 1;
+            }
+            n = n / 2;
+        }
+
+        if (n % 2 == 1) {
+            count = count + 1;
+        }
+
+        return count;
     }
 
 }
