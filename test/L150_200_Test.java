@@ -177,7 +177,40 @@ public class L150_200_Test {
         assertEquals(minStack.trailingZeroes(1808548329), 452137076);
     }
 
+    @Test
+    public void testRobCase1() {
+        assertEquals(minStack.rob(new int[]{1, 2, 3, 1}), 4);
+    }
 
+    @Test
+    public void testRobCase2() {
+        assertEquals(minStack.rob(new int[]{2, 7, 9, 3, 1}), 12);
+    }
+
+    @Test
+    public void testRobCase3() {
+        assertEquals(minStack.rob(new int[]{1, 3, 5, 4}), 7);
+    }
+
+    @Test
+    public void testRobCase4() {
+        assertEquals(minStack.rob(new int[]{9, 1, 1, 9}), 18);
+    }
+
+    @Test
+    public void testHammingWeightCase1() {
+        assertEquals(minStack.hammingWeight(11), 3);
+    }
+
+    @Test
+    public void testHammingWeightCase2() {
+        assertEquals(minStack.hammingWeight(128), 1);
+    }
+
+    @Test
+    public void testHammingWeightCase3() {
+        assertEquals(minStack.hammingWeight(-3), 31);
+    }
 
 
 }
