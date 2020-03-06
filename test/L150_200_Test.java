@@ -1,11 +1,5 @@
-
 import basicDataStructure.ListNode;
 import org.junit.Test;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import static org.junit.Assert.assertEquals;
 
@@ -207,10 +201,46 @@ public class L150_200_Test {
         assertEquals(minStack.hammingWeight(128), 1);
     }
 
+
     @Test
-    public void testHammingWeightCase3() {
-        assertEquals(minStack.hammingWeight(-3), 31);
+    public void testNumIslands1() {
+        char[][] input = {
+                {'1', '1', '1', '1', '0'},
+                {'1', '1', '0', '1', '0'},
+                {'1', '1', '0', '0', '0'},
+                {'0', '0', '0', '0', '0'},
+        };
+        assertEquals(minStack.numIslands(input), 1);
     }
 
+    @Test
+    public void testNumIslands2() {
+        char[][] input = {
+                {'1', '1', '1', '1', '0'},
+                {'1', '1', '0', '0', '0'},
+                {'0', '0', '1', '0', '0'},
+                {'0', '0', '0', '0', '1'},
+        };
+        assertEquals(minStack.numIslands(input), 3);
+    }
+
+    @Test
+    public void testNumIslands3() {
+        char[][] input = {
+                {'0', '1', '0'},
+                {'1', '1', '0'}
+        };
+        assertEquals(minStack.numIslands(input), 1);
+    }
+
+    @Test
+    public void testNumIslands4() {
+        char[][] input = {
+                {'1', '1', '1'},
+                {'0', '1', '0'},
+                {'1', '1', '1'},
+        };
+        assertEquals(minStack.numIslands(input), 1);
+    }
 
 }
