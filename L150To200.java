@@ -1,9 +1,7 @@
 import basicDataStructure.ListNode;
 
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Stack;
+import java.util.*;
 
 public class L150To200 {
 
@@ -238,9 +236,7 @@ public class L150To200 {
     }
 
     public int hammingWeight(int n) {
-        
         int count = 0;
-
         while (n > 1) {
             if (n % 2 == 1) {
                 count = count + 1;
@@ -251,8 +247,86 @@ public class L150To200 {
         if (n % 2 == 1) {
             count = count + 1;
         }
-
         return count;
     }
 
+
+    public int numIslands(char[][] grid) {
+        int startI = 0;
+        int startJ = 0;
+        int numOfIsland = 0;
+
+        boolean[][] isCheak = new boolean[grid.length][];
+        for (int i = 0; i < isCheak.length; ++i) {
+            isCheak[i] = new boolean[grid[i].length];
+            for (int j = 0; j < isCheak[i].length; ++j) {
+                isCheak[i][j] = false;
+            }
+        }
+        LinkedList<LandLocation> queue = new LinkedList<>();
+
+        while (startI < grid.length && startJ < grid[startI].length) {
+            if (grid[startI][startJ] == '1' && !isCheak[startI][startJ]) { // find a new land
+                numOfIsland++;
+                queue.add(new LandLocation(startI, startJ));
+
+                while (!queue.isEmpty()) {
+                    LandLocation tempLand = queue.pop();
+                    if (grid[tempLand.getX()][tempLand.getY()] == '1' && !isCheak[tempLand.getX()][tempLand.getY()]) {
+                        if (tempLand.getX() < grid.length - 1) {
+                            queue.add(new LandLocation(tempLand.getX() + 1, tempLand.getY()));
+                        }
+                        if (tempLand.getX() != 0) {
+                            queue.add(new LandLocation(tempLand.getX() - 1, tempLand.getY()));
+                        }
+                        if (tempLand.getY() < grid[tempLand.getX()].length - 1) {
+                            queue.add(new LandLocation(tempLand.getX(), tempLand.getY() + 1));
+                        }
+                        if (tempLand.getY() != 0) {
+                            queue.add(new LandLocation(tempLand.getX(), tempLand.getY() - 1));
+                        }
+                        isCheak[tempLand.getX()][tempLand.getY()] = true;
+                    }
+                }
+            }
+
+            isCheak[startI][startJ] = true;
+
+            if (startI != grid.length - 1) {
+                startI++;
+            } else {
+                startI = 0;
+                startJ++;
+            }
+        }
+        return numOfIsland;
+    }
+
+}
+
+
+class LandLocation {
+    int x;
+    int y;
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    public LandLocation(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
 }
