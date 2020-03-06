@@ -1,7 +1,9 @@
 import basicDataStructure.ListNode;
 
 
+import java.lang.reflect.Array;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class L150To200 {
 
@@ -300,6 +302,15 @@ public class L150To200 {
             }
         }
         return numOfIsland;
+    }
+
+
+    //Java 8 cool
+    public String largestNumber(int[] nums) {
+        return Arrays.stream(nums).boxed().collect(Collectors.toList()).stream()
+                .map(n -> n.toString())
+                .sorted((a, b) -> Long.valueOf(a + b).compareTo(Long.valueOf(b + a)) * -1)
+                .collect(Collectors.joining("")).replaceFirst("^0+(?!$)", "");
     }
 
 }
