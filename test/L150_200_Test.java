@@ -243,4 +243,27 @@ public class L150_200_Test {
         assertEquals(minStack.numIslands(input), 1);
     }
 
+
+    @Test
+    public void testLargestNumber1() {
+        assertEquals(minStack.largestNumber(new int[]{2, 10}), "210");
+    }
+
+    @Test
+    public void testLargestNumber2() {
+        assertEquals(minStack.largestNumber(new int[]{30, 34, 5, 9, 3}), "9534330");
+    }
+
+
+    @Test
+    public void testLargestNumber3() {
+        assertEquals(minStack.largestNumber(new int[]{0, 0, 0}), "0");
+    }
+
+    @Test
+    public void testLargestNumber4() {
+        assertEquals(minStack.largestNumber(new int[]{50, 3, 9}), "9503");
+    }
+
+
 }
