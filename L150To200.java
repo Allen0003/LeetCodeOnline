@@ -4,6 +4,7 @@ import basicDataStructure.ListNode;
 import java.lang.reflect.Array;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class L150To200 {
 
@@ -304,7 +305,6 @@ public class L150To200 {
         return numOfIsland;
     }
 
-
     //Java 8 cool
     public String largestNumber(int[] nums) {
         return Arrays.stream(nums).boxed().collect(Collectors.toList()).stream()
@@ -313,6 +313,48 @@ public class L150To200 {
                 .collect(Collectors.joining("")).replaceFirst("^0+(?!$)", "");
     }
 
+    //Java 8 cool
+    public String reverseWords(String s) {
+        String[] results = s.trim().split(" ");
+        return IntStream.rangeClosed(1, results.length)
+                .mapToObj(i -> results[results.length - i])
+                .map(String::trim)
+                .filter(Strings::isNotNullOrEmpty)
+                .collect(Collectors.joining(" "));
+    }
+
+
+    public int maxProduct(int[] nums) {
+        if (nums.length == 0) {
+            return Integer.MIN_VALUE;
+        } else if (nums.length == 1) {
+            return Math.max(nums[0], Integer.MIN_VALUE);
+        } else if (nums.length == 2) {
+            return Math.max(Math.max(nums[0] * nums[1], nums[0]), nums[1]);
+        }
+
+        int result = Integer.MIN_VALUE;
+        for (int i = 0; i < nums.length; i++) {
+            for (int j = i + 1; j < nums.length; j++) {
+                result = Math.max(result, Arrays.stream(Arrays.copyOfRange(nums, i, j)).reduce(1, (a, b) -> a * b));
+            }
+        }
+
+        return Math.max(result, nums[nums.length - 1]);
+
+
+//        return Math.max(Math.max(Arrays.stream(nums).reduce(1, (a, b) -> a * b),
+//                maxProduct(Arrays.copyOf(nums, nums.length - 1))),
+//                maxProduct(Arrays.copyOfRange(nums, 1, nums.length)
+//                ));
+    }
+
+}
+
+class Strings {
+    public static boolean isNotNullOrEmpty(String str) {
+        return str != null && !str.isEmpty();
+    }
 }
 
 
