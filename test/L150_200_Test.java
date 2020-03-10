@@ -266,4 +266,63 @@ public class L150_200_Test {
     }
 
 
+    @Test
+    public void testReverseWords1() {
+        assertEquals(minStack.reverseWords("the sky is blue"), "blue is sky the");
+    }
+
+
+    @Test
+    public void testReverseWords2() {
+        assertEquals(minStack.reverseWords("  hello world!  "), "world! hello");
+    }
+
+
+    @Test
+    public void testReverseWords3() {
+        assertEquals(minStack.reverseWords("a good   example"), "example good a");
+    }
+
+    @Test
+    public void testMaxProduct1() {
+        assertEquals(minStack.maxProduct(new int[]{2, 3, -2, 4}), 6);
+    }
+
+    @Test
+    public void testMaxProduct2() {
+        assertEquals(minStack.maxProduct(new int[]{-2, 0, -1}), 0);
+    }
+
+    @Test
+    public void testMaxProduct3() {
+        assertEquals(minStack.maxProduct(new int[]{-25, 10, -1, 66, 5, -9}), 82500);
+    }
+
+    @Test
+    public void testMaxProduct4() {
+        assertEquals(minStack.maxProduct(new int[]{0, -1, 4, -4, 5, -2, -1, -1, -2, -3, 0, -3, 0, 1, -1, -4, 4, 6, 2, 3, 0, -5, 2, 1, -4, -2, -1, 3, -4, -6, 0, 2, 2, -1, -5, 1, 1, 5, -6, 2, 1, -3, -6, -6, -3, 4, 0, -2, 0, 2}), 388800);
+    }
+
+    @Test
+    public void testMaxProduct5() {
+        assertEquals(minStack.maxProduct(new int[]{-4, -3}), 12);
+    }
+
+    @Test
+    public void testMaxProduct6() {
+        assertEquals(minStack.maxProduct(new int[]{0, -2}), 0);
+    }
+
+
+    @Test
+    public void testMaxProduct7() {
+        assertEquals(minStack.maxProduct(new int[]{3, -1, 4}), 4);
+    }
+
+    @Test
+    public void testMaxProduct8() {
+        assertEquals(minStack.maxProduct(new int[]{-2, 3, -4}), 24);
+    }
+
+
 }
