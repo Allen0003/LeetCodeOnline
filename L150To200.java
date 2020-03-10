@@ -328,26 +328,40 @@ public class L150To200 {
         if (nums.length == 0) {
             return Integer.MIN_VALUE;
         } else if (nums.length == 1) {
-            return Math.max(nums[0], Integer.MIN_VALUE);
-        } else if (nums.length == 2) {
-            return Math.max(Math.max(nums[0] * nums[1], nums[0]), nums[1]);
+            return nums[0];
         }
-
         int result = Integer.MIN_VALUE;
         for (int i = 0; i < nums.length; i++) {
-            for (int j = i + 1; j < nums.length; j++) {
+            for (int j = i + 1; j <= nums.length; j++) {
                 result = Math.max(result, Arrays.stream(Arrays.copyOfRange(nums, i, j)).reduce(1, (a, b) -> a * b));
             }
         }
-
-        return Math.max(result, nums[nums.length - 1]);
-
-
-//        return Math.max(Math.max(Arrays.stream(nums).reduce(1, (a, b) -> a * b),
-//                maxProduct(Arrays.copyOf(nums, nums.length - 1))),
-//                maxProduct(Arrays.copyOfRange(nums, 1, nums.length)
-//                ));
+        return result;
     }
+
+
+    public int maxProduct1(int[] nums) {
+        if (nums.length == 0) return 0;
+        if (nums.length == 1) return nums[0];
+
+        int max = nums[0];
+        int[][] dp = new int[2][nums.length];
+        dp[0][0] = nums[0];
+        dp[1][0] = nums[0];
+        for (int i = 1; i < nums.length; i++) {
+            int num = nums[i];
+            if (num > 0) {
+                dp[0][i] = Math.min(num, num * dp[0][i - 1]);
+                dp[1][i] = Math.max(num, num * dp[1][i - 1]);
+            } else {
+                dp[0][i] = Math.min(num, num * dp[1][i - 1]);
+                dp[1][i] = Math.max(num, num * dp[0][i - 1]);
+            }
+            max = Math.max(max, dp[1][i]);
+        }
+        return max;
+    }
+
 
 }
 
