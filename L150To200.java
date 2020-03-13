@@ -362,6 +362,43 @@ public class L150To200 {
         return max;
     }
 
+    // cool the very best solution comes out by myself
+    public int findPeakElement(int[] nums) {
+        for (int i = 0; i < nums.length - 1; i++) {
+            if (i == 0 && nums[i] > nums[i + 1]) {
+                return i;
+            }
+            if (nums[i] > nums[i + 1] && nums[i - 1] < nums[i]) {
+                return i;
+            }
+        }
+        return nums.length - 1;
+    }
+
+
+    public List<String> findRepeatedDnaSequences(String s) {
+
+        if (s.length() <= 10) {
+            return new ArrayList<String>();
+        }
+
+        List<String> results = new ArrayList();
+        int head = 0, tail = 10;  //find 10 characters at once
+
+        while (tail <= s.length()) {
+            if (s.substring(head + 1).contains(s.substring(head, tail))) {
+                results.add(s.substring(head, tail));
+            }
+            int addIndex = 1;
+//            while (s.charAt(head) == s.charAt(head + addIndex) && (head + addIndex) > s.length()) {
+//                addIndex++;
+//            }
+            head += addIndex;
+            tail += addIndex;
+        }
+        return results.stream().distinct().collect(Collectors.toList());
+    }
+
 
 }
 
