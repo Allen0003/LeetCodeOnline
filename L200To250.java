@@ -1,7 +1,11 @@
 import basicDataStructure.ListNode;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class L200To250 {
 
@@ -46,6 +50,24 @@ public class L200To250 {
             if (num % i == 0) return false;
         }
         return true;
+    }
+
+    public boolean containsDuplicate(int[] nums) {
+        return Arrays.stream(nums).boxed().collect(Collectors.toSet()).size() != nums.length;
+    }
+
+    public boolean isPowerOfTwo(int n) {
+
+        if (n == 1) {
+            return true;
+        } else if (n < 1) {
+            return false;
+        }
+
+        while (n % 2 == 0) {
+            n = n / 2;
+        }
+        return n == 1;
     }
 
 }
