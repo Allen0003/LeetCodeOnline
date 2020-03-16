@@ -109,4 +109,34 @@ public class L200_250_Test {
         assertEquals(forTest.countPrimes(2), 0);
     }
 
+    @Test
+    public void testContainsDuplicateCase1() {
+        assertEquals(forTest.containsDuplicate(new int[]{1, 2, 3, 1}), true);
+    }
+
+    @Test
+    public void testContainsDuplicateCase2() {
+        assertEquals(forTest.containsDuplicate(new int[]{1, 2, 3, 4}), false);
+    }
+
+    @Test
+    public void testContainsDuplicateCase3() {
+        assertEquals(forTest.containsDuplicate(new int[]{1, 1, 1, 3, 3, 4, 3, 2, 4, 2}), true);
+    }
+
+    @Test
+    public void testIsPowerOfTwoCase1() {
+        assertEquals(forTest.isPowerOfTwo(1), true);
+    }
+
+    @Test
+    public void testIsPowerOfTwoCase2() {
+        assertEquals(forTest.isPowerOfTwo(16), true);
+    }
+
+    @Test
+    public void testIsPowerOfTwoCase3() {
+        assertEquals(forTest.isPowerOfTwo(218), false);
+    }
+
 }
