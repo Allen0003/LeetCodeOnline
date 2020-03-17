@@ -139,4 +139,66 @@ public class L200_250_Test {
         assertEquals(forTest.isPowerOfTwo(218), false);
     }
 
+    @Test
+    public void testIsPalindromeCase1() {
+        ListNode a = new ListNode(1);
+        ListNode b = new ListNode(2);
+        ListNode c = new ListNode(2);
+        ListNode d = new ListNode(1);
+
+        a.next = b;
+        b.next = c;
+        c.next = d;
+
+        assertEquals(forTest.isPalindrome(a), true);
+    }
+
+    @Test
+    public void testIsPalindromeCase2() {
+        ListNode a = new ListNode(1);
+        ListNode b = new ListNode(2);
+        ListNode c = new ListNode(3);
+        ListNode d = new ListNode(4);
+
+        a.next = b;
+        b.next = c;
+        c.next = d;
+
+        assertEquals(forTest.isPalindrome(a), false);
+    }
+
+    @Test
+    public void testIsPalindromeCase3() {
+        ListNode a = new ListNode(1);
+        ListNode b = new ListNode(2);
+        ListNode c = new ListNode(3);
+        ListNode d = new ListNode(2);
+        ListNode e = new ListNode(1);
+
+        a.next = b;
+        b.next = c;
+        c.next = d;
+        d.next = e;
+
+        assertEquals(forTest.isPalindrome(a), true);
+    }
+
+
+    @Test
+    public void testSearchMatrixCase1() {
+        assertEquals(forTest.searchMatrix(
+                new int[][]{{1, 4, 7, 11, 15}, {2, 5, 8, 12, 19}, {3, 6, 9, 16, 22}, {10, 13, 14, 17, 24},
+                        {18, 21, 23, 26, 30}}, 5), true);
+    }
+
+    @Test
+    public void testSearchMatrixCase2() {
+        assertEquals(forTest.searchMatrix(
+                new int[][]{{1, 4, 7, 11, 15}, {2, 5, 8, 12, 19}, {3, 6, 9, 16, 22}, {10, 13, 14, 17, 24},
+                        {18, 21, 23, 26, 30}}, 20),  false);
+    }
+
 }
+
+
+
