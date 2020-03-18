@@ -1,6 +1,8 @@
 import basicDataStructure.ListNode;
 import org.junit.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.Assert.assertEquals;
 
 public class L200_250_Test {
@@ -195,7 +197,43 @@ public class L200_250_Test {
     public void testSearchMatrixCase2() {
         assertEquals(forTest.searchMatrix(
                 new int[][]{{1, 4, 7, 11, 15}, {2, 5, 8, 12, 19}, {3, 6, 9, 16, 22}, {10, 13, 14, 17, 24},
-                        {18, 21, 23, 26, 30}}, 20),  false);
+                        {18, 21, 23, 26, 30}}, 20), false);
+    }
+
+
+    @Test
+    public void testMajorityElementCase1() {
+        ArrayList<Integer> str = new ArrayList();
+        str.add(3);
+        assertEquals(forTest.majorityElement(new int[]{3, 2, 3}), str);
+    }
+
+    @Test
+    public void testMajorityElementCase2() {
+        ArrayList<Integer> str = new ArrayList();
+        str.add(1);
+        str.add(2);
+        assertEquals(forTest.majorityElement(new int[]{1, 1, 1, 3, 3, 2, 2, 2}), str);
+    }
+
+
+    @Test
+    public void testSummaryRangesCase1() {
+        ArrayList<String> str = new ArrayList();
+        str.add("0->2");
+        str.add("4->5");
+        str.add("7");
+        assertEquals(forTest.summaryRanges(new int[]{0, 1, 2, 4, 5, 7}), str);
+    }
+
+    @Test
+    public void testSummaryRangesCase2() {
+        ArrayList<String> str = new ArrayList();
+        str.add("0");
+        str.add("2->4");
+        str.add("6");
+        str.add("8->9");
+        assertEquals(forTest.summaryRanges(new int[]{0, 2, 3, 4, 6, 8, 9}), str);
     }
 
 }
