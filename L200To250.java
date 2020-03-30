@@ -1,10 +1,7 @@
 import basicDataStructure.ListNode;
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 
-import java.lang.reflect.Array;
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class L200To250 {
 
@@ -151,7 +148,7 @@ public class L200To250 {
 
 
     public List<String> summaryRanges(int[] nums) {
-        if (nums.length == 0){
+        if (nums.length == 0) {
             return new ArrayList<>();
         }
 
@@ -175,5 +172,65 @@ public class L200To250 {
         }
         return result;
     }
+
+
+    public int removeDuplicates(int[] nums) {
+        return Arrays.stream(nums).distinct().toArray().length;
+    }
+
+
+
+
+
+//    Initialize \text{ans}=\text{INT_MAX}
+//    Iterate the array from left to right using ii:
+//    Iterate from the current element to the end of vector using jj:
+//    Find the \text{sum}sum of elements from index ii to jj
+//    If sum is greater then ss:
+//    Update \text{ans} = \min(\text{ans}, (j - i + 1))ans=min(ans,(j−i+1))
+//    Start the next iith iteration, since, we got the smallest subarray with \text{sum} \geq ssum≥s starting from the current index.
+
+
+    public int minSubArrayLen(int s, int[] nums) {
+
+
+        int n = nums.length;
+        int ans = Integer.MAX_VALUE;
+        for (int i = 0; i < n; i++) {
+            for (int j = i; j < n; j++) {
+                int sum = 0;
+                for (int k = i; k <= j; k++) {
+                    sum += nums[k];
+                }
+                if (sum >= s) {
+                    ans = Math.min(ans, (j - i + 1));
+                    break; //Found the smallest subarray with sum>=s starting with index i, hence move to next index
+                }
+            }
+        }
+        return (ans != Integer.MAX_VALUE) ? ans : 0;
+
+//        int result = 0;
+
+
+//        1. find the number can be created by the array
+
+
+//        for (int i = 0; i < nums.length; i++) {
+//            for (int j = i + 1; j < nums.length; j++) {
+
+//                if (nums[i] + nums[j] == s) {
+//
+//                    result = Math.min(i + j, result);
+//                }
+
+
+//            }
+//        }
+//
+//
+//        return result;
+    }
+
 
 }
