@@ -236,6 +236,28 @@ public class L200_250_Test {
         assertEquals(forTest.summaryRanges(new int[]{0, 2, 3, 4, 6, 8, 9}), str);
     }
 
+
+    @Test
+    public void testMinimumSizeSubarraySumCase1() {
+        assertEquals(forTest.minSubArrayLen(7, new int[]{2, 3, 1, 2, 4, 3}), 2);
+    }
+
+    @Test
+    public void testMinimumSizeSubarraySumCase2() {
+        assertEquals(forTest.minSubArrayLen(6, new int[]{2, 3, 1, 2, 4, 3}), 2);
+    }
+
+
+    @Test
+    public void testRemoveDuplicatesCase1() {
+        assertEquals(forTest.removeDuplicates(new int[]{0, 0, 1, 1, 1, 2, 2, 3, 3, 4}), 5);
+    }
+
+    @Test
+    public void testRemoveDuplicatesCase2() {
+        assertEquals(forTest.removeDuplicates(new int[]{1, 1, 2}), 2);
+    }
+
 }
 
 
