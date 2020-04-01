@@ -24,13 +24,38 @@ public class L250_300_Test {
 
 
     @Test
-    public void testCanWinNimCase1() {
-        assertEquals(forTest.canWinNim(4), false);
+    public void testCanWinNimCase2() {
+        assertEquals(forTest.canWinNim(5), true);
     }
 
     @Test
-    public void testCanWinNimCase2() {
-        assertEquals(forTest.canWinNim(5), true);
+    public void testMissingNumberCase1() {
+        assertEquals(forTest.missingNumber(new int[]{3, 0, 1}), 2);
+    }
+
+    @Test
+    public void testMissingNumberCase2() {
+        assertEquals(forTest.missingNumber(new int[]{9, 6, 4, 2, 3, 5, 7, 0, 1}), 8);
+    }
+
+    @Test
+    public void testMissingNumberCase3() {
+        assertEquals(forTest.missingNumber(new int[]{9, 6, 4, 2, 3, 7, 0, 1, 8, 10, 11, 12, 13}), 5);
+    }
+
+    @Test
+    public void testIsUglyCase1() {
+        assertEquals(forTest.isUgly(6), true);
+    }
+
+    @Test
+    public void testIsUglyCase2() {
+        assertEquals(forTest.isUgly(8), true);
+    }
+
+    @Test
+    public void testIsUglyCase3() {
+        assertEquals(forTest.isUgly(14), false );
     }
 
 }
