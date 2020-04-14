@@ -91,8 +91,30 @@ public class L250_300_Test {
     }
 
     @Test
-    public void testSingleNumberCase1() {
-        assertEquals(forTest.singleNumber(new int[]{1, 2, 1, 3, 2, 5}), new int[]{3, 5});
+    public void testLengthOfLISCase1() {
+        assertEquals(forTest.lengthOfLIS(new int[]{10, 9, 2, 5, 3, 7, 101, 18}), 4);
     }
+
+    @Test
+    public void testLengthOfLISCase2() {
+        assertEquals(forTest.lengthOfLIS(new int[]{10, 15, 2}), 2);
+    }
+
+    @Test
+    public void testNumSquaresCase1() {
+        assertEquals(forTest.numSquares(12), 3);
+    }
+
+    @Test
+    public void testNumSquaresCase2() {
+        assertEquals(forTest.numSquares(13), 2);
+    }
+
+
+    @Test
+    public void testNumSquaresCase3() {
+        assertEquals(forTest.numSquares(8), 2);
+    }
+
 
 }
