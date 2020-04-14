@@ -1,3 +1,4 @@
+import basicDataStructure.ListNode;
 import basicDataStructure.TreeNode;
 
 import java.util.*;
@@ -138,5 +139,80 @@ public class L250To300 {
         return arrayList.stream().mapToInt(i -> i).toArray();
     }
 
+    public int lengthOfLIS(int[] nums) {
+        int lis[] = new int[nums.length];
+        int i, j, max = 0;
+
+        for (i = 0; i < nums.length; i++) {
+            lis[i] = 1;
+        }
+
+        for (i = 1; i < nums.length; i++) {
+            for (j = 0; j < i; j++) {
+                if (nums[i] > nums[j] && lis[i] < lis[j] + 1) {
+                    lis[i] = lis[j] + 1;
+                }
+            }
+        }
+
+        for (i = 0; i < nums.length; i++) {
+            max = Math.max(max, lis[i]);
+        }
+        return max;
+    }
+
+
+    // TODO
+    public int numSquares(int n) {
+
+        int result = 0;
+
+        int temp = (int) Math.sqrt(n);
+
+        List<Integer> candidateNumbers = new ArrayList<>();
+
+        for (int i = 1; i <= temp; i++) {
+            candidateNumbers.add((int) Math.pow(i, 2));
+        }
+
+
+        int count[] = new int[n + 1];
+
+        // base case
+        count[0] = 1;
+        for (int i = 1; i <= n; i++) {
+            for (int candidateNumber : candidateNumbers) {
+                if (i >= candidateNumber) {
+                    count[i] += count[i - candidateNumber];
+                }
+            }
+        }
+
+        return result;
+    }
+
+
+
+//    Input: ["flower","flow","flight"]
+//    Output: "fl"
+    public String longestCommonPrefix(String[] strs) {
+
+        String result = "";
+
+
+
+        for ( String star : strs){
+            for (int i = 0 ; i < star.length() ; i ++){
+
+                
+
+            }
+        }
+
+
+
+
+        return result;
+    }
 
 }
