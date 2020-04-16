@@ -100,6 +100,18 @@ public class L250_300_Test {
         assertEquals(forTest.lengthOfLIS(new int[]{10, 15, 2}), 2);
     }
 
+
+    @Test
+    public void testLongestCommonPrefixCase1() {
+        assertEquals(forTest.longestCommonPrefix(new String[]{"flower", "flow", "flight"}), "fl");
+    }
+
+    @Test
+    public void testLongestCommonPrefixCase2() {
+        assertEquals(forTest.longestCommonPrefix(new String[]{"", "flow", "flight"}), "");
+    }
+
+
     @Test
     public void testNumSquaresCase1() {
         assertEquals(forTest.numSquares(12), 3);
