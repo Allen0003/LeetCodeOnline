@@ -161,6 +161,33 @@ public class L250To300 {
         return max;
     }
 
+    public String longestCommonPrefix(String[] strs) {
+        if (strs == null || strs.length == 0) {
+            return "";
+        }
+        String result = "";
+        String shortest = Arrays.asList(strs).stream()
+                .sorted((e2, e1) -> e1.length() > e2.length() ? -1 : 1)
+                .findFirst().get();
+
+        for (int i = 0; i < shortest.length(); i++) {
+            char current = shortest.charAt(i);
+            boolean isDifferent = false;
+            for (String star : strs) {
+                if (current != star.charAt(i)) {
+                    isDifferent = true;
+                    break;
+                }
+            }
+            if (isDifferent) {
+                break;
+            } else {
+                result += current;
+            }
+        }
+        return result;
+    }
+
 
     // TODO
     public int numSquares(int n) {
@@ -191,28 +218,5 @@ public class L250To300 {
         return result;
     }
 
-
-
-//    Input: ["flower","flow","flight"]
-//    Output: "fl"
-    public String longestCommonPrefix(String[] strs) {
-
-        String result = "";
-
-
-
-        for ( String star : strs){
-            for (int i = 0 ; i < star.length() ; i ++){
-
-                
-
-            }
-        }
-
-
-
-
-        return result;
-    }
 
 }
