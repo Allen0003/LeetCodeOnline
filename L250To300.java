@@ -189,32 +189,49 @@ public class L250To300 {
     }
 
 
-    // TODO
+    public int numSquares2(int n) {
+        int level = 0;  // how many levels for BFS tree
+        Queue<Integer> queue = new LinkedList<>();
+        queue.add(0);
+        int upperBound = (int) Math.sqrt(n); // 開更號
+
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            for (int i = 0; i < size; i++) { // search that level
+                int curNum = queue.poll();
+                for (int j = 1; j <= upperBound; j++) {
+                    int sum = curNum + j * j;
+                    if (sum == n) return level + 1;
+                    else if (sum < n) queue.add(sum);
+                }
+            }
+            level++;
+        }
+        return 0;
+    }
+
+
     public int numSquares(int n) {
 
         int result = 0;
+        Queue<Integer> queue = new LinkedList<>();
+        int upperValue = (int) Math.sqrt(n);
+        queue.add(0);
 
-        int temp = (int) Math.sqrt(n);
-
-        List<Integer> candidateNumbers = new ArrayList<>();
-
-        for (int i = 1; i <= temp; i++) {
-            candidateNumbers.add((int) Math.pow(i, 2));
-        }
-
-
-        int count[] = new int[n + 1];
-
-        // base case
-        count[0] = 1;
-        for (int i = 1; i <= n; i++) {
-            for (int candidateNumber : candidateNumbers) {
-                if (i >= candidateNumber) {
-                    count[i] += count[i - candidateNumber];
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            for (int i = 0; i < size; i++) {
+                int current = queue.poll();
+                for (int j = 1; j <= upperValue; j++) {
+                    if (n == j * j + current) {
+                        return result + 1;
+                    } else if (n > j * j + current) {
+                        queue.add((j * j + current));
+                    }
                 }
             }
+            result++;
         }
-
         return result;
     }
 
