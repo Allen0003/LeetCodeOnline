@@ -128,5 +128,10 @@ public class L250_300_Test {
         assertEquals(forTest.numSquares(8), 2);
     }
 
+    @Test
+    public void testNumSquaresCase4() {
+        assertEquals(forTest.numSquares(3), 3);
+    }
+
 
 }
