@@ -143,4 +143,160 @@ public class AmazonTest {
         }
         return result;
     }
+
+    // Given a binary tree, return the level order traversal of its nodes' values. (ie, from left to right, level by level).
+
+// For example:
+// Given binary tree [3,9,20,null,null,15,7],
+//     3
+//    / \
+//   9  20
+//     /  \
+//    15   7
+// return its level order traversal as:
+// [
+//   [3],
+//   [9,20],
+//   [15,7]
+// ]
+
+    public List<List<Integer>> levelOrder(TreeNode root) {
+
+        if (root == null) return new ArrayList();
+
+        Queue<TreeNode> waitingQueue = new ArrayDeque();
+        List<List<Integer>> results = new ArrayList<>();
+        List<Integer> result = new ArrayList<>();
+        waitingQueue.add(root);
+        Queue<TreeNode> theSameLevelQueue = new ArrayDeque();
+        while (!waitingQueue.isEmpty()) { //when there are something inside
+            TreeNode temp = waitingQueue.poll();
+            result.add(temp.val);
+            if (temp.left != null) {
+                theSameLevelQueue.add(temp.left);
+            }
+            if (temp.right != null) {
+                theSameLevelQueue.add(temp.right);
+            }
+            if (waitingQueue.isEmpty()) { // should more to next level
+                results.add(result);
+                result = new ArrayList<>();
+                while (!theSameLevelQueue.isEmpty()) {
+                    waitingQueue.add(theSameLevelQueue.poll());
+                }
+            }
+        }
+        return results;
+    }
+
+    //TinyURL is a URL shortening service where you enter a URL such as https://leetcode.com/problems/design-tinyurl
+//and it returns a short URL such as http://tinyurl.com/4e9iAk.
+//
+//Design the encode and decode methods for the TinyURL service. There is no restriction on how your
+//encode/decode algorithm should work. You just need to ensure that a URL can be encoded to a tiny URL
+//and the tiny URL can be decoded to the original URL.
+
+    // Encodes a URL to a shortened URL.
+//    public String encode(String longUrl) {
+//
+//    }
+//
+//    // Decodes a shortened URL to its original URL.
+//    public String decode(String shortUrl) {
+//
+//    }
+
+
+    //Given a string, find the first non-repeating character in it and return it's index. If it doesn't exist, return -1.
+//
+//Examples:
+//
+//s = "leetcode"
+//return 0.
+//
+//s = "loveleetcode",
+//return 2.
+//Note: You may assume the string contain only lowercase letters.
+
+
+    public int firstUniqChar(String s) {
+
+        Map<Character, Boolean> map = new LinkedHashMap<>();
+        for (int i = 0; i < s.length(); i++) {
+            if (map.get(s.charAt(i)) != null) { // i find something
+                map.put(s.charAt(i), true);
+            } else {
+                map.put(s.charAt(i), false);
+            }
+        }
+
+        for (Map.Entry<Character, Boolean> entry : map.entrySet()) {
+            if (!entry.getValue()) {
+                return s.indexOf(entry.getKey());
+            }
+        }
+        return -1;
+    }
+
+
+    // Given an array of strings, group anagrams together.
+
+// For example, given: ["eat", "tea", "tan", "ate", "nat", "bat"],
+// Return:
+
+// [
+//   ["ate", "eat","tea"],
+//   ["nat","tan"],
+//   ["bat"]
+// ]
+// Note: All inputs will be in lower-case.
+
+    //n^2 * nlongn
+    public List<List<String>> groupAnagramsBrute(String[] strs) {
+        List<List<String>> result = new LinkedList<>();
+
+        Map<Integer, Boolean> isFoundMap = new HashMap<>();
+
+        for (int i = 0; i < strs.length; i++) {
+            char[] currentChars = strs[i].toCharArray();
+            Arrays.sort(currentChars);
+            String sortedCurrent = new String(currentChars);
+            List<String> layer = new ArrayList<>();
+            for (int j = i + 1; j < strs.length; j++) {
+                char[] targetChars = strs[j].toCharArray();
+                Arrays.sort(targetChars);
+                if (sortedCurrent.equals(new String(targetChars)) && isFoundMap.get(j) == null) { // find what I want
+                    layer.add(strs[j]);
+                    isFoundMap.put(j, true);
+                }
+            }
+            if (!layer.isEmpty() || isFoundMap.get(i) == null) {
+                layer.add(strs[i]);
+                result.add(layer);
+            }
+        }
+        return result;
+    }
+
+    public List<List<String>> groupAnagrams(String[] strs) {
+        List<List<String>> result = new LinkedList<>();
+        Arrays.sort(strs);
+        Map<String, ArrayList<String>> map = new HashMap<>();
+
+        for (String str : strs) {
+            char[] currentChars = str.toCharArray();
+            Arrays.sort(currentChars);
+            String key = new String(currentChars);
+            if (!map.containsKey(key)) {
+                map.put(key, new ArrayList<>());
+            }
+            map.get(key).add(str);
+        }
+
+        for (Map.Entry<String, ArrayList<String>> entry : map.entrySet()) {
+            result.add(entry.getValue());
+        }
+        return result;
+    }
+
 }
