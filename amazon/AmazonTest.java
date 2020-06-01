@@ -299,4 +299,121 @@ public class AmazonTest {
         return result;
     }
 
+
+//Design a data structure that supports all following operations in average O(1) time.
+
+//insert(val): Inserts an item val to the set if not already present.
+//remove(val): Removes an item val from the set if present.
+//getRandom: Returns a random element from current set of elements. Each element must have the same probability of being returned.
+
+//Example:
+// Init an empty set.
+//RandomizedSet randomSet = new RandomizedSet();
+
+// Inserts 1 to the set. Returns true as 1 was inserted successfully.
+//randomSet.insert(1);
+
+// Returns false as 2 does not exist in the set.
+//randomSet.remove(2);
+
+// Inserts 2 to the set, returns true. Set now contains [1,2].
+//randomSet.insert(2);
+
+// getRandom should return either 1 or 2 randomly.
+//randomSet.getRandom();
+
+// Removes 1 from the set, returns true. Set now contains [2].
+//randomSet.remove(1);
+
+// 2 was already in the set, so return false.
+//randomSet.insert(2);
+
+// Since 2 is the only number in the set, getRandom always return 2.
+//randomSet.getRandom();
+
+
+    // Find the kth largest element in an unsorted array. Note that it is the kth largest element in the sorted order, not the kth distinct element.
+
+// For example,
+// Given [3,2,1,5,6,4] and k = 2, return 5.
+
+// Note:
+// You may assume k is always valid, 1 ≤ k ≤ array's length.
+
+    public int findKthLargest(int[] nums, int k) {
+        PriorityQueue<Integer> minHeap = new PriorityQueue<>();
+
+        for (int num : nums) {
+            minHeap.add(num);
+            if (minHeap.size() > k) {
+                minHeap.remove();
+            }
+        }
+        return minHeap.remove();
+    }
+
+// Given a digit string, return all possible letter combinations that the number could represent.
+// A mapping of digit to letters (just like on the telephone buttons) is given below.
+
+// 2 - abc
+// 3 - def
+// 4 - ghi
+// 5 - jkl
+// 6 - mno
+// 7 - pqrs
+// 8 - tuv
+// 9 - wxyz
+
+// Input:Digit string "23"
+// Output: ["ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf"].
+
+
+    public List<String> letterCombinations(String digits) {
+        List<String> result = new ArrayList<>();
+
+        if (digits == null || digits.length() == 0) {
+            return result;
+        }
+
+        letterCombinationsRecursive(result, digits, "", 0, new String[]{"0", "1", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"});
+        return result;
+    }
+
+    public void letterCombinationsRecursive(List<String> result, String digits, String current, int index, String[] mapping) {
+        if (index == digits.length()) {
+            result.add(current);
+            return;
+        }
+
+        String letters = mapping[digits.charAt(index) - '0'];
+        for (int i = 0; i < letters.length(); i++) {
+            letterCombinationsRecursive(result, digits, current + letters.charAt(i), index + 1, mapping);
+        }
+    }
+
+
+//Given a linked list, determine if it has a cycle in it.
+//Follow up:
+//Can you solve it without using extra space?
+
+    public boolean hasCycle(ListNode head) {
+
+        if (head == null || head.next == null) {
+            return false;
+        }
+
+        ListNode start1 = head;
+        ListNode start2 = head.next;
+        while (true) {
+            if (start1.equals(start2)) {
+                return true;
+            }
+            if (start1 == null || start1.next == null || start2 == null || start2.next == null || start2.next.next == null) {
+                return false;
+            }
+            start1 = start1.next;
+            start2 = start2.next.next;
+        }
+    }
+
 }
