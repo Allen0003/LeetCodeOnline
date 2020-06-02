@@ -416,4 +416,159 @@ public class AmazonTest {
         }
     }
 
+
+    //Given a string s, find the longest palindromic substring in s. You may assume that the maximum length of s is 1000.
+
+//Example:
+//Input: "babad"
+//Output: "bab"
+
+//Note: "aba" is also a valid answer.
+
+//Example:
+//Input: "cbbd"
+//Output: "bb"
+
+    public String longestPalindrome(String s) {
+
+        if (s == null || s.length() == 1) {
+            return s;
+        }
+        int start = 0;
+        int end = 0;
+
+        for (int i = 0; i < s.length(); i++) {
+            int len = Math.max(this.getMiddlePoint(s, i, i + 1), this.getMiddlePoint(s, i, i));
+
+            if (len > end - start) {
+                start = i - (len - 1) / 2;
+                end = i + len / 2;
+            }
+        }
+        return s.substring(start, end + 1);
+    }
+
+    private int getMiddlePoint(String s, int left, int right) {
+        if (left > right) {
+            return 0;
+        }
+        while (left > 0 && right < s.length() && s.charAt(left) == s.charAt(right)) {
+            left--;
+            right++;
+        }
+        return (left + right) / 2;
+    }
+
+
+    public int[] twoSum(int[] nums, int target) {
+        if (nums.length < 2) {
+            return null;
+        }
+//        key, , value
+        HashMap<Integer, Integer> map = new HashMap<>();
+        map.put(nums[0], 0);
+
+        for (int i = 1; i < nums.length; i++) {
+            if (map.containsKey(target - nums[i])) {
+                return new int[]{i, map.get(target - nums[i])};
+            } else {
+                map.put(nums[i], i);
+            }
+        }
+        return null;
+    }
+
+
+    public boolean wordBreak(String s, List<String> wordDict) {
+
+        boolean[] dp = new boolean[s.length() + 1];
+        dp[0] = true;
+
+        for (int low = 0; low <= s.length(); low++) {
+            if (!dp[low]) {
+                continue;
+            }
+            for (int high = low + 1; high <= s.length(); high++) {
+                if (wordDict.contains(s.substring(low, high))) {
+                    dp[high] = true;
+                }
+            }
+        }
+        return dp[s.length()];
+    }
+
+
+    public int minCostClimbingStairs(int[] cost) {
+
+        if (cost.length == 0) {
+            return 0;
+        }
+        if (cost.length == 1) {
+            return cost[0];
+        }
+        if (cost.length == 2) {
+            return Math.min(cost[0], cost[1]);
+        }
+
+        int[] dp = new int[cost.length + 1];
+        dp[0] = 0;
+        dp[1] = 0;
+        for (int i = 2; i <= cost.length; i++) {
+            dp[i] = Math.min(cost[i - 1] + dp[i - 1], dp[i - 2] + cost[i - 2]);
+        }
+        return dp[cost.length];
+    }
+
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        if (root == null) {
+            return null;
+        }
+
+        if (root.equals(p) || root.equals(q)) {
+            return root;
+        }
+
+        TreeNode left = lowestCommonAncestor(root.left, p, q);
+        TreeNode right = lowestCommonAncestor(root.right, p, q);
+        if (left == null) { //can't find anything on the left subtree
+            return right;
+        } else if (right == null) { //can't find anything on the right subtree
+            return left; // start from this point
+        } else {
+            return root;
+        }
+    }
+
+
+    public List<List<Integer>> subsets(int[] nums) {
+        List<List<Integer>> result = new ArrayList<>();
+        for (int i = 0; i < Math.pow(2, nums.length); i++) {
+            System.out.println(Integer.toString(i, 2));
+            String[] temp = Integer.toString(i, 2).split("");
+            List<Integer> tempList = new ArrayList<>();
+            for (int j = 0; j < temp.length; j++) {
+                if (temp.equals('1')) {
+                    tempList.add(nums[j]);
+                }
+            }
+            result.add(tempList);
+        }
+
+
+//        for (int start = 0; start < nums.length; start++) {
+//            for (int end = start; end < nums.length; end++) {
+//                int index = end - start;  // for looping the array
+//                System.out.println(index);
+//                List<Integer> tempList = new ArrayList<>();
+//                while (index >= 0) {
+//                    tempList.add(nums[index]);
+//                    index--;
+//                }
+//                result.add(tempList);
+//            }
+//        }
+        return result;
+    }
+
+
 }
