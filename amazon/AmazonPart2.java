@@ -162,15 +162,37 @@ public class AmazonPart2 {
 
 
     public List<Integer> partitionLabels(String S) {
-
         List<Integer> result = new ArrayList<>();
         int startPoint = 0;
         int endPoint = 0;
 
+        boolean isSkip = false;
         while (endPoint < S.length()) {
-            endPoint = S.lastIndexOf(S.charAt(startPoint));
-            startPoint = endPoint + 1;
-            result.add(startPoint);
+            if (!isSkip) {
+                endPoint = S.lastIndexOf(S.charAt(startPoint)) + 1;
+            }
+            String tempString = S.substring(startPoint, endPoint);
+            String leftString = S.substring(endPoint);
+
+            isSkip = false;
+            // check does any character in tempString contains in leftString
+            for (int i = 0; i < tempString.length(); i++) {
+                int judge = leftString.indexOf(tempString.charAt(i));
+                if (judge != -1) { //still can find something
+                    endPoint = endPoint + judge+1;
+                    isSkip = true;
+                    break;
+                }
+            }
+
+            if (!isSkip) {
+                result.add(endPoint - startPoint);
+                startPoint = endPoint;
+            }
+        }
+
+        if (startPoint != endPoint) {
+            result.add(endPoint - startPoint);
         }
 
         return result;
