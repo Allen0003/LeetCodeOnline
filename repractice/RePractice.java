@@ -1,10 +1,11 @@
 package repractice;
 
+import basicDataStructure.ListNode;
 import basicDataStructure.TreeNode;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.PriorityQueue;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class RePractice {
 
@@ -111,20 +112,131 @@ public class RePractice {
         for (int num : nums) {
             if (count.get(num) == null) { // first
                 count.put(num, 1);
-                if (maxCount < 1){
+                if (maxCount < 1) {
                     maxCount = 1;
                     result = num;
                 }
             } else {
                 count.put(num, count.get(num) + 1);
-                if (maxCount < count.get(num)){
+                if (maxCount < count.get(num)) {
                     maxCount = count.get(num);
                     result = num;
                 }
             }
         }
-
         return result;
     }
+
+    //167
+    public int[] twoSum(int[] numbers, int target) {
+
+        if (numbers == null || numbers.length < 2) {
+            return null;
+        }
+
+        int first = 0, second = numbers.length - 1;
+
+        while (first < second) {
+            if (target == (numbers[first] + numbers[second])) {
+                return new int[]{first + 1, second + 1};
+            } else if ((numbers[first] + numbers[second]) > target) {
+                second--;
+            } else if ((numbers[first] + numbers[second]) < target) {
+                first++;
+            }
+        }
+
+        return null;
+    }
+
+
+    //189
+    public void rotate(int[] nums, int k) {
+
+        if (nums == null || k < 0) {
+            throw new IllegalArgumentException("Illegal argument!");
+        }
+
+        k = k % nums.length;
+        List<Integer> list = Arrays.stream(nums).boxed().collect(Collectors.toList());
+        while (k > 0) {
+            list.add(0, list.get(list.size() - 1));
+            list.remove(list.size() - 1);
+            k--;
+        }
+
+        for (int i = 0; i < nums.length; i++) {
+            nums[i] = list.get(i);
+        }
+
+        list.stream().forEach(System.out::println);
+    }
+
+
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+
+        ListNode result = null;
+        ListNode head = null;
+        boolean isOverFlow = false;
+        int current = 0;
+        while (l1 != null || l2 != null) {
+            current = 0;
+            if (l1 != null) {
+                current += l1.val;
+            }
+
+            if (l2 != null) {
+                current += l2.val;
+            }
+
+            if (isOverFlow) {
+                current++;
+            }
+
+            if (current > 9) {
+                isOverFlow = true;
+            } else {
+                isOverFlow = false;
+            }
+
+            current = current % 10;
+            if (result == null) {
+                result = new ListNode(current);
+                head = result;
+            } else {
+                result.next = new ListNode(current);
+                result = result.next;
+            }
+            if (l1 != null) {
+                l1 = l1.next;
+            }
+            if (l2 != null) {
+                l2 = l2.next;
+            }
+        }
+
+        if (isOverFlow) {
+            result.next = new ListNode(1);
+        }
+        return head;
+    }
+
+    //009
+    public boolean isPalindrome(int x) {
+        if (x < 0) {
+            return false;
+        }
+        String temp = String.valueOf(x);
+        int start = 0, end = temp.length() - 1;
+        while (start < end) {
+            if (temp.charAt(start) != temp.charAt(end)) {
+                return false;
+            }
+            start++;
+            end--;
+        }
+        return true;
+    }
+
 
 }
