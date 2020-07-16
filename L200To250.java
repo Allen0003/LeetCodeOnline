@@ -1,6 +1,8 @@
 import basicDataStructure.ListNode;
+import basicDataStructure.TreeNode;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 public class L200To250 {
@@ -179,58 +181,160 @@ public class L200To250 {
     }
 
 
-
-
-
-//    Initialize \text{ans}=\text{INT_MAX}
-//    Iterate the array from left to right using ii:
-//    Iterate from the current element to the end of vector using jj:
-//    Find the \text{sum}sum of elements from index ii to jj
-//    If sum is greater then ss:
-//    Update \text{ans} = \min(\text{ans}, (j - i + 1))ans=min(ans,(j−i+1))
-//    Start the next iith iteration, since, we got the smallest subarray with \text{sum} \geq ssum≥s starting from the current index.
-
-
+    //FIXME 209
     public int minSubArrayLen(int s, int[] nums) {
+        Arrays.sort(nums);
+        int target = s;
+        List<Integer> result = new ArrayList<>();
+        int start = 0, end = nums.length - 1, times = 0;
 
+        while (start < end) {
+            if (nums[end] <= target) {
+                target = target - nums[end];
+                result.add(nums[end]);
+                if (this.contains(nums, target, start, end)) {
 
-        int n = nums.length;
-        int ans = Integer.MAX_VALUE;
-        for (int i = 0; i < n; i++) {
-            for (int j = i; j < n; j++) {
-                int sum = 0;
-                for (int k = i; k <= j; k++) {
-                    sum += nums[k];
+                    System.out.println("here 1");
+
+                    return result.size() + 1;
                 }
-                if (sum >= s) {
-                    ans = Math.min(ans, (j - i + 1));
-                    break; //Found the smallest subarray with sum>=s starting with index i, hence move to next index
+                end--;
+            } else if (nums[start] <= target) {
+                target = target - nums[start];
+                result.add(nums[start]);
+                if (this.contains(nums, target, start, end)) {
+
+                    System.out.println("here 2");
+
+                    result.stream().forEach(System.out::println);
+
+                    return result.size() + 1;
                 }
+                start++;
+            } else if (nums[start] > target) {  // need to start over
+                times++;
+                result = new ArrayList<>();
+                end = nums.length - times - 1;
+                start = 0;
+                target = s;
+            }
+            if (target == 0) {
+                return result.size();
             }
         }
-        return (ans != Integer.MAX_VALUE) ? ans : 0;
-
-//        int result = 0;
-
-
-//        1. find the number can be created by the array
-
-
-//        for (int i = 0; i < nums.length; i++) {
-//            for (int j = i + 1; j < nums.length; j++) {
-
-//                if (nums[i] + nums[j] == s) {
-//
-//                    result = Math.min(i + j, result);
-//                }
-
-
-//            }
-//        }
-//
-//
-//        return result;
+        return 0;
     }
 
+    public boolean contains(final int[] arr, final int key, final int start, final int end) {
+        return Arrays.stream(Arrays.copyOfRange(arr, start, end)).anyMatch(i -> i == key);
+    }
+
+
+    // 213. House Robber II
+    public int rob(int[] nums) {
+        int n = nums.length;
+
+        if (n == 0) return 0;
+        if (n == 1) return nums[0];
+        if (n == 2) return Math.max(nums[0], nums[1]);
+
+        return Math.max(robSub(Arrays.copyOfRange(nums, 0, n - 1)), robSub(Arrays.copyOfRange(nums, 1, n)));
+    }
+
+
+    private int robSub(int[] nums) {
+        int n = nums.length;
+
+        if (n == 0) return 0;
+        if (n == 1) return nums[0];
+
+        if (n > 2) {
+            nums[n - 3] += nums[n - 1];
+        }
+
+        for (int i = n - 4; i >= 0; i--) {
+            nums[i] += nums[i + 2] > nums[i + 3] ? nums[i + 2] : nums[i + 3];
+        }
+
+        return Math.max(nums[0], nums[1]);
+    }
+
+
+    //230 Kth Smallest Element in a BST
+    public int kthSmallest(TreeNode root, int k) {
+        return this.kthSmallest(root, new AtomicInteger(0), k);
+    }
+
+    private int kthSmallest(TreeNode root, AtomicInteger i, int k) {
+
+        if (root == null) {
+            return Integer.MAX_VALUE;
+        }
+
+        // search in left subtree
+        int left = kthSmallest(root.left, i, k); //left
+        // if k'th smallest is found in left subtree, return it
+        if (left != Integer.MAX_VALUE) { //center
+            return left;
+        }
+        // if current element is k'th smallest, return its value
+        if (i.incrementAndGet() == k) {
+            return root.val;
+        }
+
+        return kthSmallest(root.right, i, k); // right
+    }
+
+
+    public int countLeftNode(TreeNode root) {
+
+        if (root.left != null) {
+            return this.countLeftNode(root.left) + 1;
+        }
+        return 1;
+    }
+
+
+    //216 Combination Sum III
+    public List<List<Integer>> combinationSum3(int k, int n) {
+        int target = n;
+        List<List<Integer>> results = new ArrayList<>();
+
+
+//        while (true) {
+//
+//            combinationSum3(k, n, new ArrayList<>())
+//
+//            break;
+//        }
+
+//        for (int i = 1; i <= 9; i++) {
+//            if (target > i && (result.size() != k - 1)) { // the last one
+//                result.add(i);
+//                target = target - i;
+//            } else if (result.size() == k - 1) {
+//                result.add(target);
+//                break;
+//            }
+//        }
+//        results.add(result);
+        return results;
+    }
+
+    private List<Integer> combinationSum3(int k, int n, List<Integer> nums, List<Integer> result) {
+
+        int target = n;
+        for (int i : nums) {
+            if (target > i && (result.size() != k - 1)) { // the last one
+                result.add(i);
+                nums.remove(i);
+                return combinationSum3(k - 1, n - i, nums, result);
+            } else if (result.size() == k - 1) {
+                result.add(target);
+                return result;
+            }
+        }
+        return result;
+    }
 
 }
