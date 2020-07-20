@@ -297,44 +297,54 @@ public class L200To250 {
 
     //216 Combination Sum III
     public List<List<Integer>> combinationSum3(int k, int n) {
-        int target = n;
-        List<List<Integer>> results = new ArrayList<>();
-
-
-//        while (true) {
-//
-//            combinationSum3(k, n, new ArrayList<>())
-//
-//            break;
-//        }
-
-//        for (int i = 1; i <= 9; i++) {
-//            if (target > i && (result.size() != k - 1)) { // the last one
-//                result.add(i);
-//                target = target - i;
-//            } else if (result.size() == k - 1) {
-//                result.add(target);
-//                break;
-//            }
-//        }
-//        results.add(result);
-        return results;
+        Set<List<Integer>> results = new HashSet<>();
+        this.getCombination(n, new ArrayList<>(), results, k);
+        return results.stream().collect(Collectors.toList());
     }
 
-    private List<Integer> combinationSum3(int k, int n, List<Integer> nums, List<Integer> result) {
+    public void getCombination(int target, List<Integer> result, Set<List<Integer>> results, int size) {
+        if (target == 0 && result != null && result.size() == size) {
+            Collections.sort(result);
+            results.add(new ArrayList<>(result));
+            return;
+        }
 
-        int target = n;
-        for (int i : nums) {
-            if (target > i && (result.size() != k - 1)) { // the last one
-                result.add(i);
-                nums.remove(i);
-                return combinationSum3(k - 1, n - i, nums, result);
-            } else if (result.size() == k - 1) {
-                result.add(target);
-                return result;
+        for (int candidate = 9; candidate > 0; candidate--) {
+            if (candidate <= target && !result.contains(candidate)) {
+                //sum candidate to 1
+                int sum = 0;
+                for (int temp = candidate; temp > 0; temp--) {
+                    sum += temp;
+                }
+                if (sum >= (target - candidate)) {
+                    result.add(candidate);
+                    getCombination(target - candidate, result, results, size);
+                    result.remove(new Integer(candidate));
+                }
             }
         }
-        return result;
+    }
+
+    //1423
+    public int maxScore(int[] cardPoints, int k) {
+        int sum = 0, firstSum = 0;
+        int leftPoint = k;
+        int rightPoint = cardPoints.length;
+
+        for (int i = 0; i < k; i++) {
+            firstSum += cardPoints[i];
+        }
+
+        int leftSum = 0, rightSum = 0;
+        sum = firstSum;
+        while (leftPoint > 0) {
+            leftPoint--;
+            rightPoint--;
+            leftSum += cardPoints[leftPoint];
+            rightSum += cardPoints[rightPoint];
+            sum = Math.max(sum, firstSum - leftSum + rightSum);
+        }
+        return sum;
     }
 
 }
